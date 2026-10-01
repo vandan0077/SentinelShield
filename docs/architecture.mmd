@@ -1,0 +1,12 @@
+flowchart LR
+A[HTTP Client / Test Tool] --> B[Flask Web Endpoint]
+B --> C[Request Inspector]
+C --> D[Rule Based Detection Engine]
+C --> E[Rate Limiter]
+D --> F[Decision Engine]
+E --> F
+F --> G[ALLOW / FLAG / BLOCK]
+F --> H[SQLite Event Store]
+F --> I[JSONL Audit Log]
+H --> J[Dashboard API]
+J --> K[Web Dashboard]

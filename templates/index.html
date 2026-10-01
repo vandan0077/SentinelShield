@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SentinelShield Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div>
+    <h1>SentinelShield</h1>
+    <p>Advanced Intrusion Detection &amp; Web Protection System</p>
+  </div>
+  <span class="badge">LOCAL LAB</span>
+</header>
+<main>
+  <section class="cards">
+    <article><span>Total Events</span><strong id="total">0</strong></article>
+    <article><span>Blocked</span><strong id="blocked">0</strong></article>
+    <article><span>Flagged</span><strong id="flagged">0</strong></article>
+    <article><span>Allowed</span><strong id="allowed">0</strong></article>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <h2>Attack Categories</h2>
+      <div id="categories" class="bars"></div>
+    </div>
+    <div class="panel">
+      <h2>Repeatedly Flagged IPs</h2>
+      <div id="ips"></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Recent Security Events</h2>
+      <button onclick="refreshAll()">Refresh</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Time</th><th>IP</th><th>Path</th><th>Decision</th><th>Reason</th><th>Severity</th></tr></thead>
+        <tbody id="events"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel lab">
+    <h2>Authorized Lab Endpoints</h2>
+    <p>Use <code>POST /inspect</code> to inspect a request and the <code>/demo/*</code> endpoints to generate harmless local test traffic.</p>
+    <pre>curl -X POST "http://127.0.0.1:5000/inspect?q=hello"
+curl -i -X POST "http://127.0.0.1:5000/inspect?q=%3Cscript%3Ealert(1)%3C/script%3E"</pre>
+  </section>
+</main>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
